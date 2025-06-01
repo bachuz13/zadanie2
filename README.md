@@ -21,3 +21,4 @@ Obrazy tagowane są jako `latest`, ponieważ:
 ## Publikacja
 Obrazy trafiają do:
 - `ghcr.io/bachuz13/zadanie1-app`
+# Trigger build
