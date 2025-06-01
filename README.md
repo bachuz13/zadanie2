@@ -1,22 +1,23 @@
 # Zadanie 2 – Programowanie Aplikacji w Chmurze
 
-## 📦 Obraz Docker
-Budowany z `zadanie1/Dockerfile` i wysyłany do GitHub Container Registry (GHCR).
+## Opis
+Ten projekt demonstruje pipeline CI/CD w GitHub Actions, który:
+- Buduje obraz kontenera na podstawie kodu z zadania 1.
+- Wspiera platformy `linux/amd64` oraz `linux/arm64`.
+- Używa cache z DockerHub.
+- Skanuje obraz za pomocą Trivy i publikuje go tylko jeśli nie zawiera CVE o wysokim lub krytycznym poziomie.
 
-## 🧪 Skanowanie CVE
-Wykorzystano [Trivy](https://github.com/aquasecurity/trivy-action) — obraz nie jest publikowany, jeśli zawiera luki o poziomie CRITICAL lub HIGH.
+## Skaner CVE
+Użyto [Trivy](https://github.com/aquasecurity/trivy-action), ponieważ:
+- Łatwo integruje się z GitHub Actions.
+- Jest darmowy i dobrze udokumentowany.
+- Umożliwia blokowanie procesu przy wykryciu luk.
 
-## 🏷️ Tagowanie
-- `latest` – zawsze aktualny build
-- `short-sha` – unikalny tag dla konkretnego commita
-- Cache przechowywany w DockerHub jako publiczny obraz `zadanie1-buildcache`
+## Tagowanie obrazów
+Obrazy tagowane są jako `latest`, ponieważ:
+- Upraszcza to automatyzację.
+- Brak potrzeby ręcznego wersjonowania w środowisku testowym.
 
-## 🔐 Sekrety wymagane
-Ustawione w repozytorium GitHub:
-- `GHCR_USERNAME`
-- `GHCR_TOKEN`
-- `DOCKERHUB_USERNAME`
-- `DOCKERHUB_TOKEN`
-
-## 🚀 Uruchomienie
-Pipeline uruchamia się przy pushu do `main` lub ręcznie z GitHub UI.
+## Publikacja
+Obrazy trafiają do:
+- `ghcr.io/bachuz13/zadanie1-app`
